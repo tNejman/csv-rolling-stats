@@ -1,6 +1,6 @@
 # CSV Rolling Stats
 
-Command-line tool for automatic transformation of sampled-signal CSV files. For each input sample it computes, over a sliding window of configurable size:
+Command-line tool for automatic transformation of sampled-signal CSV files. For each input double it computes, over a sliding window of configurable size:
 
 * rolling average
 * rolling maximum
@@ -42,10 +42,8 @@ cmake --build build
 ## Usage
 
 ```sh
-universal-csv-transformer --in <input-filename> --out <output-filename> [--window-size=<N>]
+universal-csv-transformer --in <input-filename> --out <output-filename>
 ```
-
-`--window-size` defaults to 500.
 
 ### Example
 

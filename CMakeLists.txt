@@ -1,19 +1,22 @@
 cmake_minimum_required(VERSION 3.25)
-project(Universal_CSV_Transformer LANGUAGES CXX)
-set(APPLICATION_NAME universal-csv-transformer)
+project(CSV_Rolling_Stats LANGUAGES CXX)
+set(APPLICATION_NAME csv-rolling-stats)
 
-set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD 26)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+set(CMAKE_COLOR_DIAGNOSTICS ON)
+
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
-  set(CMAKE_BUILD_TYPE Release)
+  set(CMAKE_BUILD_TYPE Debug)
 endif()
+message("Build type is: ${CMAKE_BUILD_TYPE}")
 
 find_program(CLANG_TIDY_EXE NAMES clang-tidy)
 if(CLANG_TIDY_EXE)
-    set(CMAKE_CXX_CLANG_TIDY "${CLANG_TIDY_EXE}")
+    set(CMAKE_CXX_CLANG_TIDY "${CLANG_TIDY_EXE}" --use-color)
 endif()
 
 function(apply_compiler_flags target)
@@ -32,10 +35,11 @@ function(apply_compiler_flags target)
 
         $<$<CONFIG:Release>:-march=native>
     )
-    target_link_options(${target} PRIVATE $<$<CONFIG:Debug>:-fsanitize=address,undefined>)
+    target_link_options(${target} PUBLIC $<$<CONFIG:Debug>:-fsanitize=address,undefined>)
 endfunction()
 
 add_subdirectory(app)
+add_subdirectory(src/core)
 
 enable_testing()
 add_subdirectory(test)
