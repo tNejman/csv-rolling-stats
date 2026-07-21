@@ -1,29 +1,43 @@
 #pragma once
 
+#include <array>
+#include <climits>
 #include <expected>
 #include <functional>
 #include <istream>
 #include <optional>
 #include <string>
 
-enum class ReadError { END_OF_FILE, PARSE_ERROR };
+#include "io/IoLib.hpp"
+
+enum class ReadError { END_OF_FILE, PARSE_ERROR, HARDWARE_ISUE };
+enum class ReadLineError { END_OF_FILE, HARDWARE_ISSUE, TOO_LONG_LINE };
 
 class ISampleReader {  // NOLINT(cppcoreguidelines-special-member-functions)
  private:
   std::reference_wrapper<std::istream> input_stream_;
+  std::array<char, io_lib::DOUBLE_STR_BUFFER_SIZE> line_buffer_;
 
  protected:
-  std::optional<char> nextChar() {
-    int char_read = input_stream_.get().get();
-    if ( char_read == std::char_traits<char>::eof() ) {
-      return std::nullopt;
+  [[nodiscard]] std::expected<std::array<char, io_lib::DOUBLE_STR_BUFFER_SIZE>, ReadLineError>
+  nextLine() noexcept {  // ok return arr by value; small enough
+    input_stream_.get().getline( line_buffer_.data(), static_cast<std::streamsize>( line_buffer_.size() ) );
+    if ( input_stream_.get().bad() ) {
+      return std::unexpected{ ReadLineError::HARDWARE_ISSUE };
     }
-    return static_cast<char>( char_read );
+    if ( input_stream_.get().fail()
+         && input_stream_.get().gcount() == static_cast<std::streamsize>( line_buffer_.size() ) - 1 ) {
+      return std::unexpected{ ReadLineError::TOO_LONG_LINE };
+    }
+    if ( input_stream_.get().eof() && input_stream_.get().gcount() == 0 ) {
+      return std::unexpected{ ReadLineError::END_OF_FILE };
+    }
+    return line_buffer_;
   }
 
  public:
-  ISampleReader( std::istream& stream ) : input_stream_( stream ) {
+  ISampleReader( std::istream& stream ) : input_stream_( stream ), line_buffer_() {
   }
   virtual ~ISampleReader() = default;
-  virtual std::expected<double, ReadError> nextSample() = 0;
+  [[nodiscard]] virtual std::expected<double, ReadError> nextSample() noexcept = 0;
 };

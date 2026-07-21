@@ -13,8 +13,8 @@ class IStatWriter {  // NOLINT(cppcoreguidelines-special-member-functions)
   virtual void writeChar( char ) = 0;
 
  public:
-  IStatWriter( std::ostream& stream ) : output_stream_( stream ) {
+  IStatWriter( std::ostream& stream ) noexcept : output_stream_( stream ) {
   }
-  virtual ~IStatWriter() = default;
-  virtual void writeStatRow( StatRow ) = 0;
+  virtual ~IStatWriter() noexcept = default;
+  virtual void writeStatRow( StatRow ) noexcept = 0;
 };
