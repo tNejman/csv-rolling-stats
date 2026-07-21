@@ -2,5 +2,8 @@ build/
 iwyu.out
 header_cleanup.sh
 catch2.imp
+iwyu.imp
 .clangd
 compile_commands.json
+
+*.old

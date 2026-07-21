@@ -12,6 +12,17 @@
       }
     },
     {
+      "name": "gcc-ninja-lld",
+      "displayName": "gcc-ninja-lld",
+      "description": "",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build",
+      "cacheVariables": {
+        "CMAKE_CXX_COMPILER": "g++",
+        "CMAKE_EXE_LINKER_FLAGS": "-fuse-ld=lld"
+      }
+    },
+    {
       "name": "clang-ninja-lld",
       "displayName": "clang-ninja-lld",
       "description": "",

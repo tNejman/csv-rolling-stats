@@ -6,6 +6,7 @@ Checks: >
   clang-analyzer-*,
   cppcoreguidelines-*,
   misc-*,
+
   -modernize-use-trailing-return-type,
   -misc-non-private-member-variables-in-classes,
   -performance-enum-size,

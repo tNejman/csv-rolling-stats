@@ -16,7 +16,7 @@ message("Build type is: ${CMAKE_BUILD_TYPE}")
 
 find_program(CLANG_TIDY_EXE NAMES clang-tidy)
 if(CLANG_TIDY_EXE)
-    set(CMAKE_CXX_CLANG_TIDY "${CLANG_TIDY_EXE}" --use-color)
+    set(CMAKE_CXX_CLANG_TIDY "${CLANG_TIDY_EXE}" --use-color --fix-errors)
 endif()
 
 function(apply_compiler_flags target)
@@ -39,7 +39,7 @@ function(apply_compiler_flags target)
 endfunction()
 
 add_subdirectory(app)
-add_subdirectory(src/core)
+add_subdirectory(src/io)
 
 enable_testing()
 add_subdirectory(test)
