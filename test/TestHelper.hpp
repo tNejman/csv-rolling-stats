@@ -9,13 +9,13 @@
 #include <vector>
 
 #include "ISampleReader.h"
+#include "IStatProcessor.h"
 #include "MockReader.hpp"
 #include "StatRow.h"
-#include "core/StatProcessor.h"
 
 // NOLINTBEGIN
 
-static constexpr std::vector<StatRow> drainAndProcessAllSamples( MockReader& reader, StatProcessor& proc ) {
+static constexpr std::vector<StatRow> drainAndProcessAllSamples( MockReader& reader, IStatProcessor& proc ) {
   std::vector<StatRow> out;
   while ( true ) {
     auto s = reader.nextSample();
