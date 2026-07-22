@@ -1,7 +1,7 @@
 #pragma once
 
 #include "StatRow.h"
-#include "core/StatProcessor.h"
+#include "core/StatProcessor.h"  // NOLINT(misc-header-include-cycle)   // both have pragma, no circular include; needed here for linter support
 
 template <int WindowSize>
 requires( WindowSize > 0 )

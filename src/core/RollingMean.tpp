@@ -1,6 +1,6 @@
 #pragma once
 
-#include "core/RollingMean.h"
+#include "core/RollingMean.h"  // NOLINT(misc-header-include-cycle)   // both have pragma, no circular include; needed here for linter support
 
 template <Numeric TypeInBuf, int WindowSize>
 requires( WindowSize > 1 )

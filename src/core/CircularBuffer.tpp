@@ -4,7 +4,7 @@
 #include <optional>
 #include <type_traits>
 
-#include "core/CircularBuffer.h"
+#include "core/CircularBuffer.h"  // NOLINT(misc-header-include-cycle)   // both have pragma, no circular include; needed here for linter support
 
 template <class TypeInBuffer, int BufferSize>
 requires( BufferSize > 1 && std::is_trivially_copyable_v<TypeInBuffer> )
@@ -41,13 +41,13 @@ requires( BufferSize > 1 && std::is_trivially_copyable_v<TypeInBuffer> )
 template <class TypeInBuffer, int BufferSize>
 requires( BufferSize > 1 && std::is_trivially_copyable_v<TypeInBuffer> )
 [[nodiscard]] TypeInBuffer CircularBuffer<TypeInBuffer, BufferSize>::getFront() const noexcept {
-  return buf_[head_idx_];
+  return buf_[static_cast<size_t>( head_idx_ )];
 }
 
 template <class TypeInBuffer, int BufferSize>
 requires( BufferSize > 1 && std::is_trivially_copyable_v<TypeInBuffer> )
 [[nodiscard]] TypeInBuffer CircularBuffer<TypeInBuffer, BufferSize>::getBack() const noexcept {
-  return buf_[tail_idx_];
+  return buf_[static_cast<size_t>( tail_idx_ )];
 }
 
 template <class TypeInBuffer, int BufferSize>
