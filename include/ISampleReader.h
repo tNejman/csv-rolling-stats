@@ -8,7 +8,7 @@
 
 #include "io/IoLib.hpp"
 
-enum class ReadError { END_OF_FILE, PARSE_ERROR, HARDWARE_ISUE };
+enum class ReadError { END_OF_FILE, PARSE_ERROR, HARDWARE_ISUE, COLUMN_NAME_ERROR };
 enum class ReadLineError { END_OF_FILE, HARDWARE_ISSUE, TOO_LONG_LINE };
 
 class ISampleReader {  // NOLINT(cppcoreguidelines-special-member-functions)
@@ -37,5 +37,6 @@ class ISampleReader {  // NOLINT(cppcoreguidelines-special-member-functions)
   ISampleReader( std::istream& stream ) : input_stream_( stream ), line_buffer_() {
   }
   virtual ~ISampleReader() = default;
+  [[nodiscard]] virtual bool validateColumnName() noexcept = 0;
   [[nodiscard]] virtual std::expected<double, ReadError> nextSample() noexcept = 0;
 };

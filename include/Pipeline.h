@@ -21,6 +21,10 @@ class Pipeline {
       : reader_( reader ), processor_( processor ), writer_( writer ) {
   }
   std::variant<ReadError, WriteError, NoError> run() noexcept {
+    if ( !reader_.get().validateColumnName() ) {
+      return ReadError::COLUMN_NAME_ERROR;
+    }
+
     auto maybe_sample = reader_.get().nextSample();
     while ( maybe_sample ) {
       auto stat_row = processor_.get().process( *maybe_sample );

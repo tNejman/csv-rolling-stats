@@ -14,4 +14,6 @@ constexpr inline int WRITE_ERROR_CODE = 5;
 constexpr inline int FLAG_PARSE_ERROR = 6;
 
 constexpr inline int HELP_SHOWN_EXIT_CODE = 7;
+
+constexpr inline int INVALID_INPUT_FILE_STYLE = 8;
 }  // namespace exit_codes

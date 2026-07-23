@@ -5,6 +5,7 @@
 #include <expected>
 #include <istream>
 #include <optional>
+#include <string_view>
 #include <system_error>
 
 #include "ISampleReader.h"
@@ -23,6 +24,12 @@
 // NOLINTEND(cppcoreguidelines-pro-bounds-pointer-arithmetic)
 
 CsvReader::CsvReader( std::istream& stream ) noexcept : ISampleReader( stream ) {
+}
+
+[[nodiscard]] bool CsvReader::validateColumnName() noexcept {
+  static constexpr std::string_view COLUMN_NAMES = "Wejście;";
+  const auto first_line_buf = nextLine();
+  return first_line_buf.has_value() && std::string_view( first_line_buf->data() ) == COLUMN_NAMES;
 }
 
 [[nodiscard]] std::expected<double, ReadError> CsvReader::nextSample() noexcept {

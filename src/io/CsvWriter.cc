@@ -14,9 +14,12 @@
 // NOLINTBEGIN(cppcoreguidelines-pro-bounds-pointer-arithmetic)
 std::optional<std::array<char, io_lib::DOUBLE_STR_BUFFER_SIZE>> CsvWriter::doubleToCharArr(
     double to_be_processed ) noexcept {
+  static constexpr int PRECISION = 2;
+
   std::array<char, io_lib::DOUBLE_STR_BUFFER_SIZE> buffer{};
-  auto [ptr, ec] = std::to_chars( buffer.data(), buffer.data() + buffer.size(), to_be_processed );
-  if ( ec == std::errc{} ) {
+  auto [ptr, ec] = std::to_chars( buffer.data(), buffer.data() + buffer.size(), to_be_processed,
+                                  std::chars_format::fixed, PRECISION );
+  if ( ec == std::errc{} && ptr != buffer.data() + buffer.size() ) {
     *ptr = '\0';
     return buffer;
   }

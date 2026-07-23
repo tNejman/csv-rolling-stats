@@ -29,6 +29,8 @@ static inline int pipelineReturnToExitCode( std::variant<ReadError, WriteError, 
                                              case ReadError::PARSE_ERROR:
                                                return exit_codes::PARSE_ERROR_IN_INPUT_FILE_CODE;
                                              case ReadError::HARDWARE_ISUE: return exit_codes::HARDWARE_ISSUE_CODE;
+                                             case ReadError::COLUMN_NAME_ERROR:
+                                               return exit_codes::INVALID_INPUT_FILE_STYLE;
                                            }
                                            std::unreachable();
                                          },

@@ -17,7 +17,7 @@ function(f_add_test_executable target_name file_name)
     )
     target_link_libraries(${target_name} PRIVATE
         Catch2::Catch2WithMain
-        # Core
+        Io
     )
     target_compile_options(${target_name} PRIVATE -g -O0)
     catch_discover_tests(${target_name})
@@ -30,3 +30,5 @@ include(Catch)
 f_add_test_executable(TestCsvRollingStats TestCsvRollingStats.cc)
 f_add_test_executable(TestHelperTest TestHelperTest.cc)
 f_add_test_executable(TestBasicRollingStats TestBasicRollingStats.cc)
+f_add_test_executable(TestReader TestReader.cc)
+f_add_test_executable(TestWriter TestWriter.cc)

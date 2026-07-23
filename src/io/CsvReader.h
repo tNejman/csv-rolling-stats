@@ -15,5 +15,6 @@ class CsvReader : public ISampleReader {
  public:
   CsvReader( std::istream& stream ) noexcept;
 
+  [[nodiscard]] bool validateColumnName() noexcept override;
   [[nodiscard]] std::expected<double, ReadError> nextSample() noexcept override;
 };
