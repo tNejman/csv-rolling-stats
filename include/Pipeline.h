@@ -31,6 +31,7 @@ class Pipeline {
       if ( !writer_.get().writeStatRow( stat_row ) ) {
         return WriteError{};
       }
+      maybe_sample = reader_.get().nextSample();
     }
     if ( maybe_sample.error() != ReadError::END_OF_FILE ) {
       return maybe_sample.error();

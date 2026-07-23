@@ -49,8 +49,7 @@ void CsvWriter::truncateDoubleBuffer( std::array<char, io_lib::DOUBLE_STR_BUFFER
 }
 
 CsvWriter::CsvWriter( std::ostream& stream ) : IStatWriter( stream ) {
-  static constexpr std::string_view COLUMN_NAMES = { "Wejście; Avg; Max; Min;\n" };
-  writeStringView( COLUMN_NAMES );
+  writeStringView( io_lib::COLUMN_NAMES_OUT );
 }
 
 // NOLINTBEGIN(cppcoreguidelines-pro-bounds-pointer-arithmetic,cppcoreguidelines-pro-type-reinterpret-cast)
