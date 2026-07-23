@@ -36,7 +36,7 @@ cmake --build build
 [location of compilet binary is `/build/bin`]
 
 ```sh
-universal-csv-transformer --in <input-filename> --out <output-filename>
+csv-rolling-stats --in <input-filename> --out <output-filename>
 ```
 
 ### Example
