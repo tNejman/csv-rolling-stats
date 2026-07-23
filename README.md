@@ -24,7 +24,7 @@ The program utilizes a monotonic queue to calculate rolling minimum and maximum 
 
 ## Building
 
-Requirements: GCC with C++23 support (26 for tests), CMake >= 4.x, Ninja, LLD
+Requirements: GCC with C++26 support, CMake >= 4.x, Ninja, LLD
 
 ```sh
 cmake --preset=gcc-ninja-lld -DCMAKE_BUILD_TYPE=Release
