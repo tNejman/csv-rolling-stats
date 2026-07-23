@@ -1,5 +1,8 @@
 #pragma once
 
+#include <array>
+#include <optional>
+#include <ostream>
 #include "IStatWriter.h"
 #include "StatRow.h"
 #include "io/IoLib.hpp"

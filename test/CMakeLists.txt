@@ -21,7 +21,7 @@ function(f_add_test_executable target_name file_name)
     )
     target_compile_options(${target_name} PRIVATE -g -O0)
     catch_discover_tests(${target_name})
-    set_target_properties(${target_name} PROPERTIES CXX_CLANG_TIDY "") # required clear for c++26 syntax
+    set_target_properties(${target_name} PROPERTIES CXX_CLANG_TIDY "")
 endfunction()
 
 list(APPEND CMAKE_MODULE_PATH ${catch2_SOURCE_DIR}/extras)
@@ -29,3 +29,4 @@ include(Catch)
 
 f_add_test_executable(TestCsvRollingStats TestCsvRollingStats.cc)
 f_add_test_executable(TestHelperTest TestHelperTest.cc)
+f_add_test_executable(TestBasicRollingStats TestBasicRollingStats.cc)

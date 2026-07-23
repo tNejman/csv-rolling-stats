@@ -84,7 +84,7 @@ void CircularBuffer<TypeInBuffer, BufferSize>::pushBack( TypeInBuffer new_val ) 
   if ( !empty() ) {
     wrapAroundIncrement( tail_idx_ );
   }
-  buf_[tail_idx_] = new_val;
+  buf_[static_cast<std::size_t>( tail_idx_ )] = new_val;
   ++elem_count_;
 }
 

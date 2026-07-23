@@ -37,13 +37,13 @@ class IRollingQueue {
 template <typename TypeInQueue, int QueueSize, QueuePolicy Policy>
 requires( QueueSize > 1 && std::is_trivially_copyable_v<TypeInQueue> )
 void IRollingQueue<TypeInQueue, QueueSize, Policy>::push( const TypeInQueue& value ) noexcept {
-  if ( !deque_.isEmpty && deque_.getFront().index + QueueSize <= current_index_ ) {
+  if ( !deque_.empty() && deque_.getFront().index_ + QueueSize <= current_index_ ) {
     deque_.popFront();
   }
-  while ( !deque_.empty() && COMPARE( deque_.getBack(), value ) ) {
+  while ( !deque_.empty() && COMPARE( deque_.getBack().value_, value ) ) {
     deque_.popBack();
   }
-  deque_.pushBack( value );
+  deque_.pushBack( QueuePos{ .value_ = value, .index_ = current_index_ } );
   ++current_index_;
 }
 

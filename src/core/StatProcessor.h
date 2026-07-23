@@ -20,4 +20,4 @@ class StatProcessor : public IStatProcessor {
   StatRow process( double sample ) override;
 };
 
-#include "core/StatProcessor.tpp"
+#include "StatProcessor.tpp"

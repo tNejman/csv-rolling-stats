@@ -19,9 +19,9 @@ TEST_CASE( "hand-calc-data1" ) {
 
   REQUIRE( samples.size() == expected_output.size() );
   for ( int i = 0; i < samples.size(); ++i ) {
-    const StatRow calculated = calculateExpectedRow( samples, i, WINDOW_SIZE );
+    const StatRow calculated = test_helper::calculateExpectedRow( samples, i, WINDOW_SIZE );
     const StatRow& expected = expected_output.at( i );
-    checkRowApprox( calculated, expected );
+    test_helper::checkRowApprox( calculated, expected );
   }
 }
 

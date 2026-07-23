@@ -4,6 +4,7 @@
 #include <functional>
 #include <ios>
 #include <ostream>
+#include <string_view>
 
 #include "StatRow.h"
 #include "io/IoLib.hpp"

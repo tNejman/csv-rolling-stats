@@ -21,7 +21,7 @@ class MockReader : public ISampleReader {
       : ISampleReader( dummy_stream_ ), sample_stream_( std::move( init_stream ) ) {
   }
 
-  std::expected<double, ReadError> nextSample() override {
+  [[nodiscard]] std::expected<double, ReadError> nextSample() noexcept override {
     if ( sample_stream_.empty() ) {
       return std::unexpected{ ReadError::END_OF_FILE };
     }

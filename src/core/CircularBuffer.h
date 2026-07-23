@@ -9,7 +9,7 @@ template <class TypeInBuffer, int BufferSize>
 requires( BufferSize > 1 && std::is_trivially_copyable_v<TypeInBuffer> )
 class CircularBuffer {
  private:
-  std::array<TypeInBuffer, BufferSize> buf_{};
+  std::array<TypeInBuffer, static_cast<std::size_t>( BufferSize )> buf_{};
   int head_idx_ = 0;  // latest front used slot
   int tail_idx_ = 0;  // latest back used slot
   int elem_count_ = 0;
@@ -41,4 +41,4 @@ class CircularBuffer {
   [[nodiscard]] bool tryPopBack() noexcept;
 };
 
-#include "core/CircularBuffer.tpp"
+#include "CircularBuffer.tpp"

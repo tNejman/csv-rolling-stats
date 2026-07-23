@@ -7,3 +7,6 @@ iwyu.imp
 compile_commands.json
 
 *.old
+*.csv
+
+.vscode/

@@ -1,10 +1,11 @@
 #include "io/CsvWriter.h"
 
 #include <array>
+#include <charconv>
+#include <optional>
 #include <ostream>
 #include <string_view>
 #include <system_error>
-#include <type_traits>
 
 #include "IStatWriter.h"
 #include "StatRow.h"
@@ -51,8 +52,8 @@ CsvWriter::CsvWriter( std::ostream& stream ) : IStatWriter( stream ) {
 
 // NOLINTBEGIN(cppcoreguidelines-pro-bounds-pointer-arithmetic,cppcoreguidelines-pro-type-reinterpret-cast)
 bool CsvWriter::writeStatRow( StatRow row_to_write ) noexcept {
-  std::array<double, 4> stat_row_values = { row_to_write.org_input_, row_to_write.mean_, row_to_write.max_,
-                                            row_to_write.min_ };
+  std::array<double, 4> const stat_row_values = { row_to_write.org_input_, row_to_write.mean_, row_to_write.max_,
+                                                  row_to_write.min_ };
   for ( const auto& val : stat_row_values ) {
     auto char_buf = doubleToCharArr( val );
     if ( !char_buf ) {

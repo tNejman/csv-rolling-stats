@@ -22,4 +22,4 @@ class RollingMean {
   TypeInBuf getMean() noexcept;
 };
 
-#include "core/RollingMean.tpp"
+#include "RollingMean.tpp"

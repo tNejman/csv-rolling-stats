@@ -1,6 +1,8 @@
 #pragma once
 
+#include <array>
 #include <expected>
+#include <istream>
 #include <optional>
 
 #include "ISampleReader.h"
